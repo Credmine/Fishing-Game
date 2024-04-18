@@ -7,9 +7,12 @@ public class ObjectMovement : MonoBehaviour
     public float speed = 5f;
     private float xMoveDirection;
     private float xBoundary = 15f;
+    GameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         if (transform.position.x > 0)
         {
             xMoveDirection = -1;
@@ -27,6 +30,7 @@ public class ObjectMovement : MonoBehaviour
         // ABSTRACTION
         Move();
         DestroyOutOfBound();
+        DestroyOnGameOver();
     }
 
     protected void Move()
@@ -37,6 +41,14 @@ public class ObjectMovement : MonoBehaviour
     protected void DestroyOutOfBound()
     {
         if ((xMoveDirection == 1 && transform.position.x > xBoundary) || (xMoveDirection == -1 && transform.position.x < -xBoundary))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    protected void DestroyOnGameOver()
+    {
+        if (gameManager.gameIsActive == false)
         {
             Destroy(gameObject);
         }

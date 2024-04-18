@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HookController : MonoBehaviour
 {
     public float speed = 10f;
-    float yTopBoundary = -1, yBotBoundary = -8;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float yTopBoundary = 0.02f, yBotBoundary = -8;
+    private GameObject caughtObject;
+    GameManager gameManager;
 
+    private void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
     // Update is called once per frame
     void Update()
     {
         MoveHook();
         ConstrainHook();
+
+        if (caughtObject != null)
+        {
+            caughtObject.transform.position = transform.position;
+        }
     }
     // Reads user scroll wheel to lower and raise hook
     void MoveHook()
@@ -40,21 +47,15 @@ public class HookController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Shark"))
+        if ( ( other.gameObject.CompareTag("Fish") || other.gameObject.CompareTag("Treasure") || other.gameObject.CompareTag("Garbage") ) && caughtObject == null)
         {
-            Debug.Log("Player is eaten by a shark...");
+            caughtObject = other.gameObject;
+            other.gameObject.transform.Rotate(0, 0, -90);
+            other.gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (other.CompareTag("Fish"))
+        if (other.gameObject.CompareTag("Shark"))
         {
-            Debug.Log("Player caught a fish!");
-        }
-        else if (other.CompareTag("Treasure"))
-        {
-            Debug.Log("Player found a treasure!");
-        }
-        else if (other.CompareTag("Garbage"))
-        {
-            Debug.Log("Player collected a garbage.");
+            gameManager.EndGame();
         }
     }
 }

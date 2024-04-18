@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // ENCAPSULATION
-    public float Speed
+    GameManager gameManager;
+    
+    public float Speed // ENCAPSULATION
     {
         get { return speed; }
     }
@@ -14,15 +16,16 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-        
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     
     void Update()
     {
         MovePlayer();
-        ConstrainPlayer();
+        ConstrainPlayer(); 
     }
+
     // Reads user mouse motion in the x axis to move the player left and right
     void MovePlayer()
     {
@@ -51,6 +54,25 @@ public class PlayerController : MonoBehaviour
         else if (transform.position.x > xBoundary)
         {
             transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fish"))
+        {
+            gameManager.catchValue += gameManager.fishValue;
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Treasure"))
+        {
+            gameManager.catchValue += gameManager.treasureValue;
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Garbage"))
+        {
+            gameManager.catchValue += gameManager.garbageValue;
+            Destroy(other.gameObject);
         }
     }
 }
