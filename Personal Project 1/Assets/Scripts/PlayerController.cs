@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3f;
-    [SerializeField] private float rotateSpeed = 20f;
+    // ENCAPSULATION
+    public float Speed
+    {
+        get { return speed; }
+    }
+    private float speed = 3f;
     float xBoundary = 9;
-    // Start is called before the first frame update
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         MovePlayer();

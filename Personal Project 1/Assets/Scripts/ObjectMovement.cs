@@ -22,10 +22,21 @@ public class ObjectMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        transform.Translate(Time.deltaTime * xMoveDirection * speed, 0, 0);
-        if ( (xMoveDirection == 1 && transform.position.x > xBoundary) || (xMoveDirection == -1 && transform.position.x < -xBoundary) )
+        // ABSTRACTION
+        Move();
+        DestroyOutOfBound();
+    }
+
+    protected void Move()
+    {
+        transform.position += new Vector3(Time.deltaTime * xMoveDirection * speed, 0, 0);
+    }
+
+    protected void DestroyOutOfBound()
+    {
+        if ((xMoveDirection == 1 && transform.position.x > xBoundary) || (xMoveDirection == -1 && transform.position.x < -xBoundary))
         {
             Destroy(gameObject);
         }

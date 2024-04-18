@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7223817612707511952}
   - component: {fileID: 7223817612707511958}
   - component: {fileID: 1635051948}
+  - component: {fileID: 3448651640688440734}
   m_Layer: 0
   m_Name: Garbage
   m_TagString: Garbage
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7223817612707511957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ae5b669c5737414c9ddb4456cf06287, type: 3}
   m_Name: 
@@ -110,6 +111,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6746974, y: 0.3112241, z: 1}
   m_Center: {x: 0.00052046776, y: 0.0012125373, z: 0}
+--- !u!114 &3448651640688440734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223817612707511957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2693e45ec2e62428a7e84ac2781c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1236015701
 PrefabInstance:
   m_ObjectHideFlags: 0
