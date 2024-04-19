@@ -52,9 +52,12 @@ public class HookController : MonoBehaviour
             caughtObject = other.gameObject;
             other.gameObject.transform.Rotate(0, 0, -90);
             other.gameObject.transform.localScale = new Vector3(1, 1, 1);
+
+            gameManager.PlaySound(0);
         }
         if (other.gameObject.CompareTag("Shark"))
         {
+            gameManager.PlaySound(3);
             gameManager.EndGame();
         }
     }

@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        ConstrainPlayer(); 
+        ConstrainPlayer();
     }
 
     // Reads user mouse motion in the x axis to move the player left and right
@@ -63,16 +63,19 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.catchValue += gameManager.fishValue;
             Destroy(other.gameObject);
+            gameManager.PlaySound(1);
         }
         else if (other.CompareTag("Treasure"))
         {
             gameManager.catchValue += gameManager.treasureValue;
             Destroy(other.gameObject);
+            gameManager.PlaySound(1);
         }
         else if (other.CompareTag("Garbage"))
         {
             gameManager.catchValue += gameManager.garbageValue;
             Destroy(other.gameObject);
+            gameManager.PlaySound(2);
         }
     }
 }
